@@ -35,7 +35,7 @@ class WelcomeState(QuizGameState):
 
     def __init__(self, previous_state = None):
         QuizGameState.__init__(self, previous_state)
-        assert len(self.get_active_players()) >= self.minimum_number_of_players "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
+        assert len(self.get_active_players()) >= self.minimum_number_of_players,  "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
 
     def display(self):
         welcome_players_message = ""
@@ -66,7 +66,7 @@ class EveryOneReadyState(QuizGameState):
 
     def __init__(self, previous_state = None):
         QuizGameState.__init__(self, previous_state)
-        assert len(self.get_active_players()) >= self.minimum_number_of_players "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
+        assert len(self.get_active_players()) >= self.minimum_number_of_players,  "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
         for player in self.get_active_players():
             self.ready_players[player] = self.default_state
 
@@ -111,7 +111,7 @@ class GameRoundState(QuizGameState):
 
     def __init__(self, previous_state = None):
         QuizGameState.__init__(self, previous_state)
-        assert len(self.get_active_players()) >= self.minimum_number_of_players "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
+        assert len(self.get_active_players()) >= self.minimum_number_of_players, "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
 
     def display(self):
         return """
@@ -141,7 +141,7 @@ class AnswerState(QuizGameState):
 
     def __init__(self, player, previous_state = None):
         QuizGameState.__init__(self, previous_state)
-        assert player in self.get_active_players() "player: %r, active_players: %r" % (player, self.get_active_players())
+        assert player in self.get_active_players(), "player: %r, active_players: %r" % (player, self.get_active_players())
         self.player = player
 
     def display(self):
