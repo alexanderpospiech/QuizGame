@@ -21,13 +21,13 @@ class State(object):
     #    pass
 
 
-    def display(self):
+    def message(self):
         """
         What to show, when the state is active.
         """
         pass
 
-    def options(self):
+    def options_message(self):
         """
         Which options are available.
         """
