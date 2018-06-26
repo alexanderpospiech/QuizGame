@@ -4,10 +4,12 @@
             
     Label:
         font_size: 50  
-        pos: self.center_x, 50
-        text: "0"
+        center_x: root.width / 2
+        top: root.top - 100
+        text: str(root.message)
         
     Label:
         font_size: 50  
-        pos: self.center_x, 100
-        text: "1"
+        center_x: root.width / 2
+        top: root.top - 250
+        text: str(root.options_message)

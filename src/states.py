@@ -6,13 +6,13 @@ class GameInitState(QuizGameState):
     Everybody should answer as fast as they can.
     """
 
-    def message(self):
+    def get_message(self):
         return """
         MusicGame by Alex
         Which controller is active?
         """
 
-    def options_message(self):
+    def get_options_message(self):
         player_list = list(self.get_active_players())
         enough_players_message = "All players attending? (y)"
         return """
@@ -38,7 +38,7 @@ class WelcomeState(QuizGameState):
         QuizGameState.__init__(self, previous_state)
         assert len(self.get_active_players()) >= self.minimum_number_of_players,  "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
 
-    def message(self):
+    def get_message(self):
         welcome_players_message = ""
         for player in self.get_active_players():
             welcome_players_message += "Player " + player + "\n"
@@ -47,7 +47,7 @@ class WelcomeState(QuizGameState):
             """ + welcome_players_message + """
         """
 
-    def options_message(self):
+    def get_options_message(self):
         return """
             Begin the game? (y)
         """
@@ -71,7 +71,7 @@ class EveryOneReadyState(QuizGameState):
         for player in self.get_active_players():
             self.ready_players[player] = self.default_state
 
-    def message(self):
+    def get_message(self):
         players_status = ""
         for player in self.ready_players:
             players_status += "Player " + player + " is" + (" ready " if self.ready_players[player] else " not ready") + "\n"
@@ -80,7 +80,7 @@ class EveryOneReadyState(QuizGameState):
             """ + players_status + """
         """
 
-    def options_message(self):
+    def get_options_message(self):
         player_list = list(self.get_active_players())
         return """
             Please press your red buzzer! (""" + str(player_list) + """)
@@ -115,12 +115,12 @@ class GameRoundState(QuizGameState):
         QuizGameState.__init__(self, previous_state)
         assert len(self.get_active_players()) >= self.minimum_number_of_players, "#active_players: %r, #minimum_number_of_players: %r" % (len(self.get_active_players()), self.minimum_number_of_players)
 
-    def message(self):
+    def get_message(self):
         return """
         This is the question!
         """
 
-    def options_message(self):
+    def get_options_message(self):
         player_list = list(self.get_active_players())
         return """
             Buzz now to answer first? (""" + str(player_list) + """)
@@ -146,12 +146,12 @@ class AnswerState(QuizGameState):
         assert player in self.get_active_players(), "player: %r, active_players: %r" % (player, self.get_active_players())
         self.player = player
 
-    def message(self):
+    def get_message(self):
         return """
             Player """ + self.player + """ gives the answer!
         """
 
-    def options_message(self):
+    def get_options_message(self):
         return """
             Correct answer? (y)
             Wrong answer? (n)
@@ -182,7 +182,7 @@ class CorrectAnswerSplashState(QuizGameState):
         self.increase_score(self.player)
         super(CorrectAnswerSplashState, self).__init__(self)
 
-    def message(self):
+    def get_message(self):
         current_score = ""
         scores = self.get_scores()
         for player in scores:
@@ -194,7 +194,7 @@ class CorrectAnswerSplashState(QuizGameState):
             """ + current_score + """
         """
 
-    def options_message(self):
+    def get_options_message(self):
         return """
             Next round? (y)
             Cancel? (c)
@@ -213,12 +213,12 @@ class CancelRoundSplashState(QuizGameState):
     Everybody should answer as fast as they can.
     """
     
-    def message(self):
+    def get_message(self):
         return """
             Round canceled
         """
 
-    def options_message(self):
+    def get_options_message(self):
         return """
             Canceled. Next round? (y)
         """
